@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('discussions','DiscussionController');
 
 Route::resource('channels','ChannelController');
+
+Route::resource('discussions/{discussion}/replies','RepliesController');
