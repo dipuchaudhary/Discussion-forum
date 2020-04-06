@@ -9,7 +9,7 @@
 
             <hr>
             {!! $discussion->content !!}
-
+            @if($discussion->getBestReply)
             <div class="card bg-success my-2" style="color: #fff">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -26,6 +26,7 @@
                     </div>
                 </div>
             </div>
+                @endif
         </div>
     </div>
 
