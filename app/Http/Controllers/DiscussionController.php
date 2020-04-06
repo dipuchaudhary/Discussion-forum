@@ -55,6 +55,7 @@ class DiscussionController extends Controller
             'channel_id' => $request->channel
         ]);
 
+
         session()->flash('success','discussion created sucessfully');
 
         return redirect(route('discussions.index'));
