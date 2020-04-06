@@ -2,12 +2,14 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
+use App\Reply;
 
 class Discussion extends Model
 {
     protected $fillable = [
-      'title','content','slug','channel_id','user_id'
+      'title','content','slug','channel_id','user_id','reply_id'
     ];
 
     public function author(){
@@ -21,5 +23,15 @@ class Discussion extends Model
 
     public function replies(){
         return $this->hasMany('App\Reply');
+    }
+
+    public function getBestReply(){
+        return $this->belongsTo('App\Reply','reply_id');
+    }
+
+    public function markAsBestReply(Reply $reply){
+         $this->update([
+            'reply_id' => $reply->id,
+        ]);
     }
 }

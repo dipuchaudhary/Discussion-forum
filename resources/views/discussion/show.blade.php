@@ -9,6 +9,23 @@
 
             <hr>
             {!! $discussion->content !!}
+
+            <div class="card bg-success my-2" style="color: #fff">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <img width="30px" height="30px" style="border-radius: 50%" src="{{Gravatar::src($discussion->getBestReply->owner->email)}}" alt="">
+                            <span class="ml-2 font-weight-bold ">{{$discussion->getBestReply->owner->name}}</span>
+                        </div>
+                        <div>
+                            <strong>Best Reply</strong>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {!! $discussion->getBestReply->content !!}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -19,6 +36,14 @@
                     <div>
                         <img style="border-radius: 50%;" width="40px" height="40px" src="{{Gravatar::src($reply->owner->email)}}" alt="">
                         <span class="ml-2 font-weight-bold">{{$reply->owner->name}}</span>
+                    </div>
+                    <div>
+                        @if(auth()->user()->id == $discussion->user_id)
+                        <form action="{{route('discussions.best-reply',['discussion'=> $discussion->slug,'reply'=> $reply->id ])}}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-primary btn-sm">Mark as best Reply</button>
+                        </form>
+                           @endif
                     </div>
                 </div>
             </div>

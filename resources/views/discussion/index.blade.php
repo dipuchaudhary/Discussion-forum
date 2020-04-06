@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card">
-        @foreach($discussions as $discussion)
+    @foreach($discussions as $discussion)
+    <div class="card my-2">
             @include('partials.discussion-header')
         <div class="card-body">
             <strong>
@@ -10,6 +10,6 @@
             </strong>
 
         </div>
-            @endforeach
     </div>
+    @endforeach
 @endsection
