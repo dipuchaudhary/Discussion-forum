@@ -13,3 +13,7 @@
     </div>
     @endforeach
 @endsection
+
+@section('css')
+
+    @endsection
