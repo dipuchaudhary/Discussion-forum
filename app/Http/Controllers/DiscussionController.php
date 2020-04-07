@@ -22,7 +22,9 @@ class DiscussionController extends Controller
      */
     public function index()
     {
-        return view('discussion.index', ['discussions' => Discussion::all()]);
+        return view('discussion.index', [
+            'discussions' => Discussion::filterByChannels()->paginate(3)
+        ]);
     }
 
     /**
