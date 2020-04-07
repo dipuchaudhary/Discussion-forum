@@ -128,52 +128,41 @@
                                            @if(auth()->user()->notifications->count()>0)
                                                 @foreach(auth()->user()->unReadNotifications as $notification)
                                                     <li class="list-group-item">
-                                                        <div class="row">
-                                                            <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                                                <img height="30px" width="30px" style="border-radius: 50%;" src="{{Gravatar::src($notification->data['discussion']['author']['email'])}}" class="w-50 rounded-circle">
-                                                            </div>
-                                                            <div class="col-lg-8 col-sm-8 col-8">
-                                                                <strong class="text-info"></strong>
-                                                                <div>
-                                                                    New Reply to your discussion from {{$notification->data['discussion']['author']['name']}}
+                                                        @if($notification->type == 'App\Notifications\NewReplyAdded')
+                                                            <div class="row">
+                                                                <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                                                    <img height="30px" width="30px" style="border-radius: 50%;" src="{{Gravatar::src($notification->data['discussion']['author']['email'])}}" class="w-50 rounded-circle">
                                                                 </div>
-                                                                <small class="text-primary">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</small>
+                                                                <div class="col-lg-8 col-sm-8 col-8">
+                                                                    <strong class="text-info"></strong>
+                                                                    <div>
+                                                                        New Reply to your discussion from {{$notification->data['discussion']['author']['name']}}
+                                                                    </div>
+                                                                    <small class="text-primary">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</small>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
+                                                          @if($notification->type == 'App\Notifications\MarkBestReply')
+                                                                <div class="row">
+                                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                                                        <img height="30px" width="30px" style="border-radius: 50%;" src="{{Gravatar::src($notification->data['discussion']['user_id'])}}" class="w-50 rounded-circle">
+                                                                    </div>
+                                                                    <div class="col-lg-8 col-sm-8 col-8">
+                                                                        <strong class="text-info"></strong>
+                                                                        <div>
+                                                                            Your reply to <strong>{{$notification->data['discussion']['title']}}</strong> was marked as best reply
+                                                                        </div>
+                                                                        <small class="text-primary">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</small>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                     </li>
                                                 @endforeach
+                                               @else
                                                 <li class="list-group-item text-center">No new notifications</li>
                                                @endif
                                         </ul>
                                     </li>
-{{--                                    <li class="notification-box bg-gray">--}}
-{{--                                        <div class="row">--}}
-{{--                                            <div class="col-lg-3 col-sm-3 col-3 text-center">--}}
-{{--                                                <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">--}}
-{{--                                            </div>--}}
-{{--                                            <div class="col-lg-8 col-sm-8 col-8">--}}
-{{--                                                <strong class="text-info">David John</strong>--}}
-{{--                                                <div>--}}
-{{--                                                    Lorem ipsum dolor sit amet, consectetur--}}
-{{--                                                </div>--}}
-{{--                                                <small class="text-warning">27.11.2015, 15:00</small>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="notification-box">--}}
-{{--                                        <div class="row">--}}
-{{--                                            <div class="col-lg-3 col-sm-3 col-3 text-center">--}}
-{{--                                                <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">--}}
-{{--                                            </div>--}}
-{{--                                            <div class="col-lg-8 col-sm-8 col-8">--}}
-{{--                                                <strong class="text-info">David John</strong>--}}
-{{--                                                <div>--}}
-{{--                                                    Lorem ipsum dolor sit amet, consectetur--}}
-{{--                                                </div>--}}
-{{--                                                <small class="text-warning">27.11.2015, 15:00</small>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
                                     <li class="footer bg-dark text-center">
                                         <a href="{{ route('users.notification') }}" class="text-light">View All</a>
                                     </li>

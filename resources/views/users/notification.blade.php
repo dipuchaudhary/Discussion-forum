@@ -23,7 +23,7 @@
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <img width="40px" height="40px" style="border-radius: 50%" src="{{Gravatar::src($notification->data['discussion']['user_id'])}}" alt="">
-                                    <span class="ml-2">A new reply added to your discussion <strong>{{$notification->data['discussion']['title']}}</strong></span>
+                                    <span class="ml-2">Your reply to the <strong>{{$notification->data['discussion']['title']}}</strong> marked as a best reply</span>
                                 </div>
                                 <div>
                                     <a href="{{route('discussions.show',$notification->data['discussion']['slug'])}}" class="btn btn-primary btn-sm">View Discussion</a>
