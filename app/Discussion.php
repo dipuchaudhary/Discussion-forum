@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\Notifications\MarkBestReply;
 use Illuminate\Database\Eloquent\Model;
 use App\Reply;
 
@@ -33,5 +34,7 @@ class Discussion extends Model
          $this->update([
             'reply_id' => $reply->id,
         ]);
+
+         $reply->owner->notify(new MarkBestReply($reply->discussion));
     }
 }
